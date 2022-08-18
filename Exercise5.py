@@ -1,50 +1,46 @@
-client = ["Dipesh", "Ram", "Sita"]
+print("Welcome to Health Management System \n")
 
-print("Enter the client code")
+clients = ["Ram", "Gita", "Sita"]
+
 i = 1
-for clients in client:
-    print(f"{i} --> {clients}")
+for client in clients:
+    print(f"{i} --> {client}")
     i = i+1
+print("Please select Your Choice")
+name = int(input())-1
+fullname = clients[name]
 
-print("Enter: ")
-clientno = int(input())-1
-name = client[clientno]
-
-print(f"You have Choose {name} \n Press \n 1. Data Entry \n 2. Retrieve Data")
+print("Select Your Choice \n Press \n 1. Data Entry \n 2. Data Retrieve")
 choice = int(input())
 
-print("Press\n 1. Diet \n 2. Exercise")
+print("Select Your Plan \n 1. Diet \n 2. Exercise")
 plan = int(input())
 
-def getTime():
+def gettime():
     import datetime
     return datetime.datetime.now()
 
-def getData(nam, choice):
-    namef = nam
-    plan = choice
+def dataentry(name, plan):
     if plan == 1:
-        with open(f"{namef}_addFood", "w") as addFood:
-            timing = getTime()
-            diet = (input("Enter diet name"))
-            addFood.write(f"{timing} --> {diet}")
+         with open(f"{name}__adddiet", "a") as addFood:
+                foodname = input("Enter Diet Name")
+                timing = gettime()
+                addFood.write(f"{timing} -- > {foodname}")
     else:
-        with open(f"{namef}_addExercise", "w") as addExercise:
-            timing = getTime()
-            exercise = input("Enter Exercie name")
-            addExercise.write(f"{timing}--> {exercise}")
+        with open(f"{name}__addexercise", "a") as addExercise:
+            foodname = input("Enter Exercise Name")
+            timing = gettime()
+            addExercise.write(f"{timing} -- > {foodname}")
 
-def retrieveData(nam, choice):
-    namef = nam
-    plan = choice
+
+def dataretrieve(name, plan):
     if plan == 1:
-        with open(f"{namef}_addFood", "rt") as retriveFood:
-            retriveFood.read()
+        with open(f"{name}__adddiet", "a") as addFood:
+            addFood.read()
     else:
-        with open(f"{namef}_addExercise", "rt") as retrieveExercise:
-            retrieveExercise.read()
-
+        with open(f"{name}__addexercise", "a") as addExercise:
+            addExercise.read()
 if choice == 1:
-    getData(name, plan)
+    dataentry(fullname, plan)
 else:
-    retrieveData(name, plan)
+    dataretrieve(fullname, plan)
